@@ -16,6 +16,21 @@ def handle_mention(event, say):
     user = event["user"]
     say(f"Hello <@{user}>! How can I help you today?")
 
+@app.command("/open-dashboard")
+def open_dashboard(ack, respond, command):
+    ack()
+    response_kwargs = {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "<https://your-dashboard-url.com|manage and delegate task>"
+                }
+            }
+        ]
+    }
+
 if __name__ == "__main__":
     handler = SocketModeHandler(app, SLACK_BOT_TOKEN)
     handler.start() 
